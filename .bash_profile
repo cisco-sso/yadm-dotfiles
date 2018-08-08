@@ -108,3 +108,8 @@ if [[ -d /keybase/private ]]; then
   fi
 fi
 
+#####################################################################
+# Enable bash completion for debian based distros
+if [[ -f /etc/bash_completion ]]; then
+    source /etc/bash_completion
+fi
