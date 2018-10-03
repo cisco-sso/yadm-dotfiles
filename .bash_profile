@@ -113,3 +113,11 @@ fi
 if [[ -f /etc/bash_completion ]]; then
     source /etc/bash_completion
 fi
+
+#####################################################################
+# Enable kubectl completion
+source <(kubectl completion bash)
+
+#####################################################################
+# Enable kops completion
+source <(kops completion bash)
