@@ -82,6 +82,25 @@ done
 export GOPATH=/go
 export PATH=$PATH:$GOPATH/bin:./bin/linux_amd64/:./vendor/bin:
 
+# Enable pyenv
+#   Search home directory first and then system, allow pyenv
+#     installed in home to override that of system
+#   KDK has system pyenv installed in /usr/local
+if [[ -d "/usr/local/pyenv/bin" ]]; then
+    export PATH="/usr/local/pyenv/bin:$PATH"
+fi
+if [[ -d "$HOME/.pyenv/bin" ]]; then
+    export PATH="$HOME/.pyenv/bin:$PATH"
+fi
+if  [[ -n ${PS1:-''} ]] && which pyenv &>/dev/null; then
+    eval "$(pyenv init -)"
+    eval "$(pyenv virtualenv-init -)"
+fi
+
+# Enable pulumi
+if [[ -d "$HOME/.pulumi/bin" ]]; then
+    export PATH="$HOME/.pulumi/bin:$PATH"
+fi
 
 ###############################################################################
 # Load hooks
