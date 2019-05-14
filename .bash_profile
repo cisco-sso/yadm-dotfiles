@@ -147,3 +147,11 @@ fi
 if [[ -n ${PS1:-''} ]] && which kops &>/dev/null; then
     source <(kops completion bash)
 fi
+
+#####################################################################
+# Load .bashrc if present
+
+if [[ -f .bashrc ]]; then
+    source .bashrc
+fi
+
