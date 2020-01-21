@@ -118,15 +118,18 @@ fi
 #####################################################################
 # Keybase extra configs
 
-if [[ -d /keybase/private ]]; then
-  # Find this current user's private directory (any dir without a comma in it)
-  user_private_dir=$(ls /keybase/private |grep -v ',')
-  private_bash_profile="/keybase/private/$user_private_dir/.bash_profile_private"
-  if [[ -f "$private_bash_profile" ]]; then
+# Search for an execute an extra bash profile stored in keybase
+for kd in /keybase /Volumes/Keybase; do
+  if [[ -d $kd/private ]]; then
+    # Find this current user's private directory (any dir without a comma in it)
+    user_private_dir=$(ls $kd/private |grep -v ',')
+    private_bash_profile="$kd/private/$user_private_dir/.bash_profile_private"
+    if [[ -f "$private_bash_profile" ]]; then
       echo "Executing additional bash profile $private_bash_profile"
       source $private_bash_profile
+    fi
   fi
-fi
+done
 
 #####################################################################
 # Enable bash completion for debian based distros
