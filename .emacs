@@ -9,7 +9,7 @@
 ;enable auto-revert buffer
 (global-auto-revert-mode 1)
 ;set default fill-column for line wrapping
-(setq-default fill-column 79)
+(setq-default fill-column 119)
 ;enable column number mode
 (setq column-number-mode t)
 ;set javascript indent to 2 spaces
@@ -43,7 +43,7 @@
 ; enable for all programming modes
 (add-hook 'prog-mode-hook 'column-enforce-mode)
 ; set column width
-(setq column-enforce-column 79)
+(setq column-enforce-column 119)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; Notes
