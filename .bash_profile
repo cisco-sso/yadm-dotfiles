@@ -21,27 +21,11 @@ fi
 
 if [ "$system_type" = "Darwin" ]; then
   # Dev machine (OSX)
-  # Ensure ONLY one ssh-agent is running, or connect to existing one, and add key
-  if [ ! -S ~/.ssh/ssh_auth_sock ]; then
-      eval `ssh-agent`
-      ln -sf "$SSH_AUTH_SOCK" ~/.ssh/ssh_auth_sock
-  fi
-  export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock
+  # Modern OSX starts an ssh-agent automatically
+  #   https://www.dribin.org/dave/blog/archives/2007/11/28/ssh_agent_leopard/
+  # Add the user's default key
   ssh-add -l 2>&1| grep "The agent has no identities" &>/dev/null && ssh-add &>/dev/null
-else
-  # VM Guest machine (Vagrant Linux)
-  # Enable re-attaching screen sessions with ssh-agent support
-  #   If this is an interactive session that is also an ssh session
-  if [[ -n ${PS1:-''} && -n ${SSH_TTY:-''} ]] ; then
-      # if there is an SSH_AUTH_SOCK set, and it is a socket, and it is not a link
-      if [[ -n ${SSH_AUTH_SOCK:-''} && -S "$SSH_AUTH_SOCK" && ! -L "$SSH_AUTH_SOCK" ]]; then
-          # then create the link
-          rm -f ~/.ssh/ssh_auth_sock
-          ln -sf $SSH_AUTH_SOCK ~/.ssh/ssh_auth_sock
-          export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock
-      fi
-  fi
-fi  
+fi
 
 #####################################################################
 # OSX Configs
