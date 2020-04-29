@@ -100,7 +100,7 @@ if [[ -n ${PS1:-''} ]] && which hub &>/dev/null; then
 fi
 
 #####################################################################
-# Keybase extra configs
+# bash-profile extra configs in Keybase and local mount
 
 # Search for an execute an extra bash profile stored in keybase
 for kd in /keybase /Volumes/Keybase; do
@@ -113,6 +113,14 @@ for kd in /keybase /Volumes/Keybase; do
       source $private_bash_profile
     fi
   fi
+done
+
+# Search for an extra bash profile in potential host-mounted locations
+for extra_bash_profile in "$HOME/.bash_profile_private" "$HOME/.config/kdk/.bash_profile_private"; do
+    if [[ -f "$extra_bash_profile" ]]; then
+      echo "Executing additional bash profile $extra_bash_profile"
+      source $extra_bash_profile
+    fi
 done
 
 #####################################################################
