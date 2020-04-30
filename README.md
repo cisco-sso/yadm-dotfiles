@@ -28,11 +28,15 @@ yadm push
 
 ## Customizing your setup
 
-If the user has installed [Keybase](https://keybase.io/), and has created the
-file `/keybase/private/<user-keybase-id>/.bash_profile_private`, the deployed
-[`.bash_profile`](https://github.com/dcwangmit01/yadm-dotfiles/blob/master/.bash_profile#L101)
-will source the `.bash_profile_private` file from keybase.  One must define and
-customize this file in order configure private settings.
+
+The default [`.bash_profile`](https://github.com/dcwangmit01/yadm-dotfiles/blob/master/.bash_profile#L103) provided by this repo will search for additional bash profiles in a few pre-defined locations.  If files in any of these locations exist, they will be sourced.
+
+* `$HOME/.bash_profile_private`
+* `$HOME/.config/kdk/.bash_profile_private`
+* `/keybase/private/<user-keybase-id>/.bash_profile_private`
+  * If the user has installed [Keybase](https://keybase.io/)
+
+One may customize their own private settings by creating any of the files above.  Here is an example of what the content could look like.
 
 ```
 # OSX brew, to get around API limits
